@@ -1,7 +1,8 @@
 package bank
 
 import (
-	"fmt"
+	
+	"errors"
 )
 
 type Account struct {
@@ -10,7 +11,7 @@ type Account struct {
 
 func (a *Account) Deposit(amount float64) error {
 	if amount <= 0 {
-		 return fmt.Errorf("deposit amount must be greater than zero")
+		return errors.New("deposit amount must be greater than zero")
 	}
 	a.Balance += amount
 	return nil
@@ -18,10 +19,10 @@ func (a *Account) Deposit(amount float64) error {
 
 func (a *Account) Withdraw(amount float64) error {
 	if amount <= 0 {
-		 return fmt.Errorf("withdrawal amount must be greater than zero")
+		  return errors.New("withdrawal amount must be greater than zero")
 	}
 	if amount > a.Balance {
-		 return fmt.Errorf("insufficient funds")
+		  return errors.New("insufficient funds")
 	}
 	a.Balance -= amount
 	return nil
